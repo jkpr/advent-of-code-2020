@@ -50,3 +50,36 @@ Then I used `int(binary_string, base=2)` to convert to integer. The result is 70
 ```
 
 I do not have the most elegant solution for part 2, I'm sure. In order to see the gaps, I started with a set of all numbers from 0 to the maximum, then subtracted the set of all seat IDs. Then I printed out what remained as a sorted list and visually (manually) scanned for the correct answer.
+
+# Day 6
+
+Python has some built-in methods that make this one very easy! First of all, it becomes clear that we only need a set of letters per line to test for membership. Python treats a string as an iterable of the individual letters. For example:
+
+```python
+>>> set("asdf")
+{'a', 's', 'd', 'f'}
+```
+
+For part 1, we just need the union of all sets in a group then to count the size. For part 2, we take the intersection, then count the size.
+
+I googled how to take the interection of a collection of sets, and I [found this on StackOverflow][6a]. Basically it is:
+
+```python
+set.intersection(*list_of_sets)
+```
+
+I am astonished 😲 that this works! The StackOverflow response says:
+
+> Note that `set.intersection` is not a static method, but this uses the functional notation to apply intersection of the first set with the rest of the list. So if the argument list is empty this will fail.
+
+So apparently, that is equivalent to
+
+```python
+list_of_sets[0].intersection(*list_of_sets[1:])
+```
+
+Same works with `union`. Amazing.
+
+I will need to research this one a little bit more.
+
+6a: https://stackoverflow.com/a/2541814/6438168
