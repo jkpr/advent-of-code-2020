@@ -17,3 +17,7 @@ Since the lines were all in the same format, a regular expression came to mind. 
 At this point, Python's `itertools` and `collections` modules have been useful, as they often are in programming challenges.
 
 [2a]: https://docs.python.org/3/library/collections.html#collections.Counter
+
+# Day 3
+
+The main thing to realize is that since the forest is repeating along the x-axis, we can use module arithmetic on the position of the x-axis index.
