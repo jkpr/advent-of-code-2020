@@ -6,6 +6,20 @@ Try the problems yourself at [https://adventofcode.com/2020/](https://adventofco
 
 Feel free to create a Github issue if you want to discuss anything!
 
+# Usage
+
+1. Clone this repo: `git clone https://github.com/jkpr/advent-of-code-2020`
+2. Change into the new directory: `cd advent-of-code-2020`
+3. Run `make env` to build the environment.
+4. Activate the environment with `source env/bin/activate`
+5. Run a CLI for day `N`'s code with `python3 -m advent.dayN`, e.g. `python3 -m advent.day1`.
+
+The CLI is common for each day. The main patterns for options are:
+
+- `-t` to run the code with `test_input.txt`
+- `-2` to run part 2
+- `-t -2` to run part 2 with `test_input.txt`
+
 # Day 1
 
 This is a warm up challenge. Python's standard library comes to the rescue with the [`itertools` library and `combinations` function][1a].
@@ -82,4 +96,4 @@ Same works with `union`. Amazing.
 
 I will need to research this one a little bit more.
 
-6a: https://stackoverflow.com/a/2541814/6438168
+[6a]: https://stackoverflow.com/a/2541814/6438168
