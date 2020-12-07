@@ -1,18 +1,13 @@
 from typing import List
 
-from ..utils import cli, get_input_file, read_lines
+from ..utils import common_main
 from . import part1, part2
 
 
-def main(lines: List, second_part: bool = False):
-    if not second_part:
-        part1(lines)
-    else:
-        part2(lines)
-
-
 if __name__ == "__main__":
-    args = cli()
-    source = get_input_file(puzzle_data=args.puzzle_data, module_path=__file__)
-    lines = read_lines(source)
-    main(lines, second_part=args.second_part)
+    common_main(
+        module_path=__file__,
+        input_to_int=False,
+        part1=part1,
+        part2=part2
+    )
