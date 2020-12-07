@@ -33,3 +33,20 @@ Some useful things to note.
 3.  The `re` match object has a `.groups()` method which returns just the pieces that match the regex in parentheses `()`. There is also a `.group(n)` method that is similar. `.group(0)` returns the full match, then `1` up to `n` match the pieces matched in parentheses.
 
 [4a]: https://docs.python.org/3/library/re.html
+
+# Day 5
+
+The trick is to realize this is really just binary! I created a string representing a binary number, e.g. 
+
+1. `"BFFFBBFRRR"`
+2. `"BFFFBBF"` and `"RRR"`
+3. `"1000110"` and `"111"`
+
+Then I used `int(binary_string, base=2)` to convert to integer. The result is 70 and 7. By the way, the reverse operation is 
+
+```python
+>>> bin(70)
+'0b1000110'
+```
+
+I do not have the most elegant solution for part 2, I'm sure. In order to see the gaps, I started with a set of all numbers from 0 to the maximum, then subtracted the set of all seat IDs. Then I printed out what remained as a sorted list and visually (manually) scanned for the correct answer.
