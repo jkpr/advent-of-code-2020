@@ -11,7 +11,7 @@ def part1(lines: List[str]):
     print(count)
 
 
-def part2(lines: List[int]):
+def part2(lines: List[str]):
     count = 0
     parties = "\n".join(lines).split("\n\n")
     for party in parties:

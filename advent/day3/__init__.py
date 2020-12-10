@@ -34,7 +34,7 @@ def ski(lines, delta_x, delta_y):
     return count
 
 
-def part2(lines: List[int]):
+def part2(lines: List[str]):
     result = [ski(lines, x, y) for x, y in ((1, 1), (3, 1), (5, 1), (7, 1), (1, 2))]
     prod = 1
     for i in result:

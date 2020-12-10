@@ -71,7 +71,7 @@ def is_valid_pp(pp: dict):
     return True
 
 
-def part2(lines: List[int]):
+def part2(lines: List[str]):
     count = 0
     pp_list = get_passports(lines)
     for pp in pp_list:

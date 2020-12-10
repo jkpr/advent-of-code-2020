@@ -15,7 +15,7 @@ def part1(lines: List[str]):
     print(max(result))
 
 
-def part2(lines: List[int]):
+def part2(lines: List[str]):
     result = []
     for line in lines:
         front = line[:7]

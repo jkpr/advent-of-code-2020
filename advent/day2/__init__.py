@@ -16,7 +16,7 @@ def part1(lines: List[str]):
     print(count)
 
 
-def part2(lines: List[int]):
+def part2(lines: List[str]):
     count = 0
     for line in lines:
         found = re.search(r"(\d+)-(\d+) (\w): (\w+)", line)
