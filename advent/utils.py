@@ -13,11 +13,11 @@ def read_lines(
 
 
 def get_input_file(
-    puzzle_data: str = None, module_path: str = None, test_input: bool = False
+    puzzle_data: str = None, module_path: str = None, test_input: str = None
 ) -> Path:
     if puzzle_data:
         return Path(puzzle_data)
-    source = "test_input.txt" if test_input else "input.txt"
+    source = "input.txt" if test_input is None else f"test_input{test_input}.txt"
     if module_path:
         return Path(module_path).parent.joinpath(source)
     return Path(source)
@@ -25,15 +25,21 @@ def get_input_file(
 
 def cli() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Advent of Code parser")
-    parser.add_argument("-i", "--puzzle_data", help="Puzzle input file.")
+    parser.add_argument(
+        "-i",
+        "--puzzle_data",
+        help="Puzzle input file. Uses 'input.txt' if nothing is supplied.",
+    )
     parser.add_argument(
         "-2", "--second_part", help="Run the second part.", action="store_true"
     )
     parser.add_argument(
         "-t",
         "--test_input",
-        help="Search for 'test_input.txt' for puzzle input file",
-        action="store_true",
+        metavar="N",
+        nargs="?",
+        const="",
+        help="Search for 'test_inputN.txt' for puzzle input file. Note: N can be blank.",
     )
     args = parser.parse_args()
     return args
