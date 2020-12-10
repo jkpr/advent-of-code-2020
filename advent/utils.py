@@ -67,6 +67,7 @@ def common_main(
     )
     lines = read_lines(source, input_to_int=input_to_int)
     if not args.second_part:
-        part1(lines)
+        result = part1(lines)
     else:
-        part2(lines)
+        result = part2(lines)
+    print("Returned result:", result)

@@ -105,3 +105,20 @@ First recursive algorithm. In trees, we often perform the same function on a nod
 # Day 8
 
 Could this be the first steps to building a compiler? I made some premature optimizations to plan for more op-codes.
+
+# Day 9
+
+A few items of interest:
+
+```python
+for STATEMENT:
+    ...
+else:
+    STATEMENT
+```
+
+If a `for` loop is not exited via a `break` key word, then an `else` block can be run after the `for` block completes.
+
+Also, [`slice`][9a] objects are useful for getting windows into an array.
+
+[9a]: https://docs.python.org/3/library/functions.html#slice
