@@ -1,5 +1,7 @@
 from ..utils import common_main
-from . import part1, part2
+
+# from . import part1, part2
+from .alternate import part1, part2
 
 
 if __name__ == "__main__":
