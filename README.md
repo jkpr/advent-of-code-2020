@@ -16,9 +16,11 @@ Feel free to create a Github issue if you want to discuss anything!
 
 The CLI is common for each day. The main patterns for options are:
 
-- `-t` to run the code with `test_input.txt`
+- `-t` to run part 1 with `test_input.txt`
 - `-2` to run part 2
 - `-t -2` to run part 2 with `test_input.txt`
+- `-t 1` to run part 1 with `test_input1.txt`
+- `-t 1 -2` to run part 2  with `test_input1.txt`
 
 # Day 1
 
@@ -137,7 +139,7 @@ After Googling, I learned
 - The number of ways to use 1 and 2 to add up to a number N is the (N+1)-th Fibonacci number
 - The number of ways to use 1, 2 and 3 to add up to a number N is the (N+1)-th Tribonacci number.
 
-The [Tribonacci sequence][10a] is 1, 1, 2, 4, 7, 13, 24, 44, 81.
+The [Tribonacci sequence][10a] is 1, 1, 2, 4, 7, 13, 24, 44, 81, ...
 
 So my solution is to identify the number of runs of steps of 1, how long they were, then find the corresponding "Tribonacci number" (I did by hand without knowing the name of the sequence). Then multiply all those numbers together.
 
