@@ -122,3 +122,26 @@ If a `for` loop is not exited via a `break` key word, then an `else` block can b
 Also, [`slice`][9a] objects are useful for getting windows into an array.
 
 [9a]: https://docs.python.org/3/library/functions.html#slice
+
+# Day 10
+
+Part 1 is fairly easy. I made use of `zip` with offset (by 1) lists to get the differences. 
+
+Part 2 was more complicated. In the supplied list of transformers, my breakthrough came when I noticed there were jumps of 1 and 3 only. There are no jumps of 2.
+
+Transformers on both sides of a jump of three have to stay because that is the largest jump allowed, so really I was looking at how to remove transformers that have jumps of 1 from one to the next.
+
+I also noticed that the largest run of jumps of size 1 that I had was 4.
+
+After Googling, I learned
+- The number of ways to use 1 and 2 to add up to a number N is the (N+1)-th Fibonacci number
+- The number of ways to use 1, 2 and 3 to add up to a number N is the (N+1)-th Tribonacci number.
+
+The [Tribonacci sequence][10a] is 1, 1, 2, 4, 7, 13, 24, 44, 81.
+
+So my solution is to identify the number of runs of steps of 1, how long they were, then find the corresponding "Tribonacci number" (I did by hand without knowing the name of the sequence). Then multiply all those numbers together.
+
+Also: [`itertools.groupby`][10b] came in handy for identifying runs of numbers. It automatically creates new groups when the value changes, going one item to the next.
+
+[10a]: https://mathworld.wolfram.com/Fibonaccin-StepNumber.html
+[10b]: https://docs.python.org/3/library/itertools.html#itertools.groupby
