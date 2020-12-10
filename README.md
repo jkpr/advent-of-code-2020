@@ -97,3 +97,11 @@ Same works with `union`. Amazing.
 I will need to research this one a little bit more.
 
 [6a]: https://stackoverflow.com/a/2541814/6438168
+
+# Day 7
+
+First recursive algorithm. In trees, we often perform the same function on a node as on its descendents. That is what we did with `get_size` here.
+
+# Day 8
+
+Could this be the first steps to building a compiler? I made some premature optimizations to plan for more op-codes.
