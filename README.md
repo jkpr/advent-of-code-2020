@@ -147,3 +147,46 @@ Also: [`itertools.groupby`][10b] came in handy for identifying runs of numbers. 
 
 [10a]: https://mathworld.wolfram.com/Fibonaccin-StepNumber.html
 [10b]: https://docs.python.org/3/library/itertools.html#itertools.groupby
+
+# Day 11
+
+With maze searching, it is easier to list out all the directions as offsets to search rather than name the directions, i.e.
+
+```python
+directions = (
+    (0, 1),
+    (0, -1),
+    (1, 1),
+    (1, -1),
+    (-1, 0),
+    (1, 0),
+    (-1, 1),
+    (-1, -1),
+)
+```
+
+is better than 
+
+```python
+def move_up(...):
+    ...
+
+def move_up_right(...):
+    ...
+
+... # etc.
+```
+
+Also for mazes, I find that working with a single array and doing calculations between index and `(x, y)` is better than maintaining an 2-D array. These companion functions are helpful. Of course, results can be cached to get even faster, too!
+
+```python
+def idx_to_xy(idx, max_x, max_y):
+    return divmod(idx, max_y)
+
+def xy_to_idx(x, y, max_x, max_y):
+    return x * max_y + y
+```
+
+It is easier for me to think in terms of `(x, y)` rather than `row, col`. In my manner of speaking, I say `row, col` which corresponds to `(y, x)`, so it is opposite to `(x, y)`. But I almost always think in terms of `(x, y)` and `(x, y)` usually makes more sense for 2-D arrays.
+
+Final thing to say: the neighbors to check in each part do not change from generation to generation. I decided to cache the neighbors lookup ahead of time with `get_neighbors1` and `get_neighbors2`. It is much better than calculating them on each pass through.
