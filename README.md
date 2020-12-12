@@ -190,3 +190,17 @@ def xy_to_idx(x, y, max_x, max_y):
 It is easier for me to think in terms of `(x, y)` rather than `row, col`. In my manner of speaking, I say `row, col` which corresponds to `(y, x)`, so it is opposite to `(x, y)`. But I almost always think in terms of `(x, y)` and `(x, y)` usually makes more sense for 2-D arrays.
 
 Final thing to say: the neighbors to check in each part do not change from generation to generation. I decided to cache the neighbors lookup ahead of time with `get_neighbors1` and `get_neighbors2`. It is much better than calculating them on each pass through.
+
+# Day 12
+
+Fairly straightforward problem. Not too many tricks to share today. One thing to share is that with Python we can update two values at once. For example:
+
+```python
+# Set x and y at the same time:
+x, y = 0, 0
+
+# Perform 180 degree rotation for the problem:
+wx, wy = -wx, -wy
+```
+
+This makes use of iterable unpacking from tuples.
