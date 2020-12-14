@@ -19,7 +19,6 @@ def apply_mask(mask, value):
 def part1(lines: List[str]):
     answers = {}
     for line in lines:
-        cur_mask = ""
         if line.startswith("mask = "):
             mask = line[7:]
         else:
@@ -59,7 +58,6 @@ def apply_mask_v2(mask, address):
 def part2(lines: List[str]):
     answers = {}
     for line in lines:
-        cur_mask = ""
         if line.startswith("mask = "):
             mask = line[7:]
         else:

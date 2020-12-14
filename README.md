@@ -38,7 +38,7 @@ At this point, Python's `itertools` and `collections` modules have been useful, 
 
 # Day 3
 
-The main thing to realize is that since the forest is repeating along the x-axis, we can use module arithmetic on the position of the x-axis index.
+The main thing to realize is that since the forest is repeating along the x-axis, we can use modular arithmetic on the position of the x-axis index.
 
 # Day 4
 
@@ -103,6 +103,19 @@ I will need to research this one a little bit more.
 # Day 7
 
 First recursive algorithm. In trees, we often perform the same function on a node as on its descendents. That is what we did with `get_size` here.
+
+I also made use of [`re.findall(...)`][7a] since rules could have one or more descriptions of bags. The behavior is different when there are 0 or 1 groups vs 2+ groups in the pattern.
+
+```python
+>>> import re
+>>> line = "bright violet bags contain 1 bright purple bag."
+>>> re.findall(r"(\w+ \w+) bag", line)
+['bright violet', 'bright purple']
+>>> re.findall(r"(\d+ )?(\w+ \w+) bag", line)
+[('', 'bright violet'), ('1 ', 'bright purple')]
+```
+
+[7a]: https://docs.python.org/3/library/re.html#re.findall
 
 # Day 8
 
@@ -260,7 +273,7 @@ A number saved as a string, e.g. `"42"`, can be padded with zeros using `.zfill(
 The cartesian product also came in handy for the second part to fill in the `X` values in the memory mask. See documentation for [`itertools.product`][14b].
 
 ```python
->>> list(itertools.product([0, 1], repeat=3))
+>>> for i in itertools.product([0, 1], repeat=3): print(i)
 (0, 0, 0)
 (0, 0, 1)
 (0, 1, 0)

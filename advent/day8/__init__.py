@@ -28,6 +28,5 @@ def run_experiment(i, lines):
 
 
 def part2(lines: List[str]):
-    boot = Boot(lines)
     for i in range(len(lines)):
         run_experiment(i, lines)
