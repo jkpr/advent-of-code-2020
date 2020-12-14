@@ -3,7 +3,7 @@
 ## List of makefile targets
 ## - help    : show this help documentation
 help: makefile
-	@sed -n 's/^## //p' $<
+	@sed -n 's/^.*##[ ]//p' $<
 
 ## - lint    : Run pylint on the source code
 lint: env
