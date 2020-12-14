@@ -141,9 +141,11 @@ After Googling, I learned
 
 The [Tribonacci sequence][10a] is 1, 1, 2, 4, 7, 13, 24, 44, 81, ...
 
-So my solution is to identify the number of runs of steps of 1, how long they were, then find the corresponding "Tribonacci number" (I did by hand without knowing the name of the sequence). Then multiply all those numbers together.
+So my solution is to identify the number of runs of steps of 1, how long they were, then find the corresponding "Tribonacci number" (I did by hand without knowing the name of the sequence).
+Then multiply all those numbers together.
 
-Also: [`itertools.groupby`][10b] came in handy for identifying runs of numbers. It automatically creates new groups when the value changes, going one item to the next.
+Also: [`itertools.groupby`][10b] came in handy for identifying runs of numbers.
+It automatically creates new groups when the value changes, going one item to the next.
 
 [10a]: https://mathworld.wolfram.com/Fibonaccin-StepNumber.html
 [10b]: https://docs.python.org/3/library/itertools.html#itertools.groupby
@@ -177,7 +179,8 @@ def move_up_right(...):
 ... # etc.
 ```
 
-Also for mazes, I find that working with a single array and doing calculations between index and `(x, y)` is better than maintaining an 2-D array. These companion functions are helpful. Of course, results can be cached to get even faster, too!
+Also for mazes, I find that working with a single array and doing calculations between index and `(x, y)` is better than maintaining a 2-D array.
+These companion functions are helpful. Of course, results can be cached to get even faster, too!
 
 ```python
 def idx_to_xy(idx, max_x, max_y):
@@ -187,13 +190,19 @@ def xy_to_idx(x, y, max_x, max_y):
     return x * max_y + y
 ```
 
-It is easier for me to think in terms of `(x, y)` rather than `row, col`. In my manner of speaking, I say `row, col` which corresponds to `(y, x)`, so it is opposite to `(x, y)`. But I almost always think in terms of `(x, y)` and `(x, y)` usually makes more sense for 2-D arrays.
+It is easier for me to think in terms of `(x, y)` rather than `row, col`.
+In my manner of speaking, I say `row, col` which corresponds to `(y, x)`, so it is opposite to `(x, y)`.
+But I almost always think in terms of `(x, y)` and `(x, y)` usually makes more sense for 2-D arrays.
 
-Final thing to say: the neighbors to check in each part do not change from generation to generation. I decided to cache the neighbors lookup ahead of time with `get_neighbors1` and `get_neighbors2`. It is much better than calculating them on each pass through.
+Final thing to say: the neighbors to check in each part do not change from generation to generation.
+I decided to cache the neighbors lookup ahead of time with `get_neighbors1` and `get_neighbors2`.
+It is much better than calculating them on each pass through.
 
 # Day 12
 
-Fairly straightforward problem. Not too many tricks to share today. One thing to share is that with Python we can update two values at once. For example:
+Fairly straightforward problem. Not too many tricks to share today.
+One thing to share is that with Python we can update two values at once.
+For example:
 
 ```python
 # Set x and y at the same time:
