@@ -213,3 +213,35 @@ wx, wy = -wx, -wy
 ```
 
 This makes use of iterable unpacking from tuples.
+
+# Day 13
+
+Part 1 was accomplished by checking and seeing case by case. 
+
+With such a small input file, I could see I had a bus number of 13 (my smallest). So, I would not need to look more than 13 above the start time.
+
+Part 2 was harder. My original solution did not use the Chinese Remainder Theorem. First thing I noticed was that my bus numbers were all prime. I also noticed that a lot of buses would be arriving at the same time. So for that to happen, it had to be a multiple of the product of all of those buses. I did a "brute force" search on that multiple. 
+
+But the Chinese Remainder Theorem was definitely the way to go to immediately calculate an answer.
+
+Calculate the product of an iterable of numbers with [math.prod][13a]:
+
+```python
+import math
+
+nums = [3, 5, 6]
+result = math.prod(nums)  # 90
+```
+
+Also there is a difference between `/` and `//`:
+
+```python
+>>> 10 / 2
+5.0
+>>> 10 // 2
+5
+```
+
+The first (`/`) is float division and the second (`//`) is integer division.
+
+[13a]: https://docs.python.org/3/library/math.html#math.prod
