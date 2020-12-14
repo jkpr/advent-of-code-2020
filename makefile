@@ -1,15 +1,16 @@
-.PHONY: help, lint, black
-
 ## List of makefile targets
 ## - help    : show this help documentation
+.PHONY: help
 help: makefile
 	@sed -n 's/^.*##[ ]//p' $<
 
 ## - lint    : Run pylint on the source code
+.PHONY: lint
 lint: env
 	. env/bin/activate && python3 -m pylint advent/
 
 ## - black   : Run black on the source code
+.PHONY: black
 black: env
 	. env/bin/activate && python3 -m black advent/
 
