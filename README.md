@@ -245,3 +245,28 @@ Also there is a difference between `/` and `//`:
 The first (`/`) is float division and the second (`//`) is integer division.
 
 [13a]: https://docs.python.org/3/library/math.html#math.prod
+
+# Day 14
+
+My previous notes on converting between base 10 and base 2 were helpful here!
+
+A number saved as a string, e.g. `"42"`, can be padded with zeros using `.zfill(width)`. See [`zfill` documentation][14a].
+
+```python
+>>> "42".zfill(5)
+"00042"
+```
+
+The cartesian product also came in handy for the second part to fill in the `X` values in the memory mask. See documentation for [`itertools.product`][14b].
+
+```python
+>>> list(itertools.product([0, 1], repeat=3))
+(0, 0, 0)
+(0, 0, 1)
+(0, 1, 0)
+...
+(1, 1, 1)
+```
+
+[14a]: https://docs.python.org/3/library/stdtypes.html#str.zfill
+[14b]: https://docs.python.org/3/library/itertools.html#itertools.product
