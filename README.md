@@ -268,5 +268,20 @@ The cartesian product also came in handy for the second part to fill in the `X` 
 (1, 1, 1)
 ```
 
+Thanks to [Chris Freeman][14c], I learned an alternate way to "convert a number to binary and left pad it with zeros". 
+This makes use of the [String Format Specification Mini-Language][14d]. This string formatting language is quite powerful, and it can do a lot.
+
+```python
+>>> value = 100
+>>> width = 36
+>>> binary = f"{value:0{width}b}"
+>>> binary
+'000000000000000000000000000001100100'
+>>> int(binary, base=2)
+100
+```
+
 [14a]: https://docs.python.org/3/library/stdtypes.html#str.zfill
 [14b]: https://docs.python.org/3/library/itertools.html#itertools.product
+[14c]: https://teamtreehouse.com/chrisfreeman3
+[14d]: https://docs.python.org/3/library/string.html#formatspec
