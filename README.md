@@ -298,3 +298,19 @@ This makes use of the [String Format Specification Mini-Language][14d]. This str
 [14b]: https://docs.python.org/3/library/itertools.html#itertools.product
 [14c]: https://teamtreehouse.com/chrisfreeman3
 [14d]: https://docs.python.org/3/library/string.html#formatspec
+
+# Day 15
+
+I first took the approach of 
+
+- "Given I am on turn `i`, what number should I be?" 
+
+What was easier to answer and faster for the code was:
+
+- "Given I am on turn `i` and I already know what number I should have, what number should be for turn `i+1`?"
+
+For the first approach, I needed to keep track of previous two positions using a list / deque (part 2 ran in 45 seconds). 
+But for the second approach, I could keep track of the previous position alone (part 2 ran in 15 seconds).
+
+One helpful assumption / discovery: the first number after going through the input is 0 because the input numbers are all unique. 
+That is true for my puzzle input and for all the examples.
