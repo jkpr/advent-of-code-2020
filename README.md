@@ -314,3 +314,39 @@ But for the second approach, I could keep track of the previous position alone (
 
 One helpful assumption / discovery: the first number after going through the input is 0 because the input numbers are all unique. 
 That is true for my puzzle input and for all the examples.
+
+# Day 16
+
+At first, I used ranges to represent the rule. So for example, `class: 1-3 or 5-7` becomes
+
+```python
+{
+    "class": [range(1, 4), range(5, 8)]
+}
+```
+
+But then I switched to sets, so that the above becomes:
+
+```python
+{
+    "class": {1, 2, 3, 5, 6, 7}
+}
+```
+
+This change simplified things a little bit.
+
+A separate issue, now. It is common to have a list of rows, e.g.
+
+```python
+m = [
+    [0, 1, 2],
+    [3, 4, 5],
+]
+```
+
+Iterating over the rows is easy: `for row in m: ...`. Now how to iterate over columns? Use `zip`!
+
+```python
+for col in zip(*m):
+    ...
+```
