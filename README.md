@@ -515,3 +515,59 @@ The default value is 0 for `.` and value of 1 for `#`.
 Neighbors were obtained using the cartesian product of `[-1, 0, -1]` in 3 or 4 dimensions as an offset.
 
 I refactored the code so that it will work in any number of dimensions >= 3.
+
+## Day 17, numpy solution
+
+Instead of going line by line, I'll just note the interesting functions here:
+
+1. [`numpy.exand_dims()`][17a] to add dimensions to an array.
+
+```python
+>>> import numpy as np
+>>> x = np.array([1, 2])
+>>> np.expand_dims(x, axis=(0,))
+array([[1, 2]])
+```
+
+2. [`numpy.ones()`][17b] to create an array filled with ones.
+
+```python
+>>> ones = np.ones(shape=(3,3), dtype=int)
+>>> ones
+array([[1, 1, 1],
+       [1, 1, 1],
+       [1, 1, 1]])
+```
+
+3. [`numpy.pad`][17c] to add padding around the original array. This is needed in the problem because the Conway Cube can grow out in every direction. The default is to pad with 0.
+
+```python
+>>> padded = np.pad(ones, 1)
+>>> padded
+array([[0, 0, 0, 0, 0],
+       [0, 1, 1, 1, 0],
+       [0, 1, 1, 1, 0],
+       [0, 1, 1, 1, 0],
+       [0, 0, 0, 0, 0]])
+```
+
+4. [scipy.ndimage.convolve][17d] to perform a convolution. This applies a kernel, or a function, at each point in the original array. Photo blurring is a convoluton using a normal kernel (taking a weighted average of all neighbors).
+
+```python
+>>> kernel = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> kernel
+array([[0, 1, 0],
+       [1, 0, 1],
+       [0, 1, 0]])
+>>> scipy.ndimage.convolve(padded, kernel)
+array([[0, 1, 1, 1, 0],
+       [1, 2, 3, 2, 1],
+       [1, 3, 4, 3, 1],
+       [1, 2, 3, 2, 1],
+       [0, 1, 1, 1, 0]])
+```
+
+[17a]: https://numpy.org/doc/stable/reference/generated/numpy.expand_dims.html
+[17b]: https://numpy.org/doc/stable/reference/generated/numpy.ones.html
+[17c]: https://numpy.org/doc/stable/reference/generated/numpy.pad.html
+[17d]: https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.convolve.html

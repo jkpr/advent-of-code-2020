@@ -1,5 +1,6 @@
 networkx
 numpy
+scipy
 ipython
 
 black
