@@ -507,3 +507,11 @@ Iterating over the rows is easy: `for row in m: ...`. Now how to iterate over co
 for col in zip(*m):
     ...
 ```
+
+# Day 17
+
+Fun to play another Conway game. This time I made copious use of `defaultdict`. 
+The default value is 0 for `.` and value of 1 for `#`. 
+Neighbors were obtained using the cartesian product of `[-1, 0, -1]` in 3 or 4 dimensions as an offset.
+
+I refactored the code so that it will work in any number of dimensions >= 3.
