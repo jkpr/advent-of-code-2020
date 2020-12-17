@@ -1,4 +1,6 @@
 networkx
+numpy
+ipython
 
 black
 pylint

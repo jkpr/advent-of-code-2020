@@ -39,8 +39,8 @@ def part2(lines: List[str]):
     good = filter(lambda line: all(x in valid for x in line), nearby)
     # Now, build up a list of "possible" solutions.
     # Keys are the field, e.g. "seat",
-    # and values are the set of column indices with 
-    # entries that all fall into the field's range 
+    # and values are the set of column indices with
+    # entries that all fall into the field's range
     # of valid numbers.
     possible = defaultdict(set)
     for i, col in enumerate(zip(*good)):
@@ -49,7 +49,7 @@ def part2(lines: List[str]):
                 possible[key].add(i)
     # Build up a solution dictionary.
     # Keys are the field, e.g. "seat",
-    # and values are the column index 
+    # and values are the column index
     # that must match the field.
     solution = {}
     while possible:

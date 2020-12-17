@@ -317,6 +317,163 @@ That is true for my puzzle input and for all the examples.
 
 # Day 16
 
+I will first describe my alternate solution, which uses `numpy` arrays.
+
+## Day 16, Part 1, numpy solution
+
+The first task is to make a numpy array out of the string input, e.g. `"3,9,18"`. For that we can use [`numpy.fromstring`][16a]:
+
+```python
+>>> import numpy as np
+>>> s = "3,9,18"
+>>> np.fromstring(s, dtype=int, sep=",")
+array([ 3,  9, 18])
+```
+
+[16a]: https://numpy.org/doc/stable/reference/generated/numpy.fromstring.html
+
+Next, I wanted to convert my list of arrays representing the "nearby tickets", to a 2-D numpy array. That is done with [`numpy.stack`][16b] (the more specialized [`numpy.vstack`][16c] would have worked, too).
+
+```python
+nearby = np.stack(list_of_arrays)
+```
+
+[16b]: https://numpy.org/doc/stable/reference/generated/numpy.stack.html
+[16c]: https://numpy.org/doc/stable/reference/generated/numpy.vstack.html
+
+This puts each line from the puzzle input as a row in the 2-D array. In other words, `nearby[i]` returns the numpy array for the _i_-th row. That concludes data ingest. 
+
+The next goal is to create a "cube" (`the_cube` in the code). This is a 3-D array where the 2-D array for neighbor tickets (I imagine it as the XY plane) is replicated for each rule (think: the Z axis) in the rules. Each entry in each replicant is transformed to True / False depending on if the value fits in the rule's range.
+
+Integral to this is [`numpy.isin`][16d], the element-wise version of Python's `in`. Since the values in the rules dictionary are sets (representing valid integer ranges), they need to be converted to a list for this to work correctly. Thank you, documentation 💪!
+
+```python
+axis0 = sorted(rules)  # The keys (fields) from the rules dictionary.
+the_cube = np.stack([
+    np.isin(nearby, list(rules[item])) for item in axis0
+])
+```
+
+Also, note that stacking joins the arrays along a new axis, and that is axis 0 by default. Or, in summary,
+
+- Axis 0 of the cube represents the rules, e.g. `class: 0-1 or 4-19`
+- Axis 1 of the cube represents the individual nearby tickets
+- Axis 2 of the cube represents the columns of the nearby tickets
+
+A given entry `(i, j, k)` in `the_cube` is True if nearby ticket `j`, column `k`, fits in the range for rule / field `i`.
+
+[16d]: https://numpy.org/doc/stable/reference/generated/numpy.isin.html
+
+Now, for part 1, we need to create a 2-D boolean mask, matching `nearby` in shape. We want to take the 1-D array `the_cube[:, j, k]` for a particular `j` and `k`, see if any elements are True, then negate it (to be True if all array elements are False). With the `:` for axis 0, we get the array across all rules. This is done with [`numpy.any`][16e]. Then we apply that mask to the original `nearby` matrix and sum the elements for our answer to Part 1.
+
+```python
+mask = ~np.any(the_cube, axis=0)
+return np.sum(nearby[mask])
+```
+
+[16e]: https://numpy.org/doc/stable/reference/generated/numpy.any.html
+
+## Day 16, Part 2, numpy solution
+
+We get the cube again, and the first task is to remove the "bad" rows (defined as nearby tickets on which all entries do not fit any rule) from each 2-D array of nearby tickets. 
+
+```python
+row_mask = np.all(np.any(the_cube, axis=0), axis=1)
+good_cube = the_cube[:, row_mask, :]
+```
+
+The result of the inner `np.any` matches the 2-D array of nearby tickets, asking if an entry at `j, k` has a True value anywhere along the Z-axis (axis 0). Then `np.all` is True for the rows (new axis 0) where all entries along axis 1 are True. We apply that `row_mask` to axis 1 of `the_cube` to get the `good_cube`.
+
+Now we enter the end game. We create "mutable" 2-D arrays
+
+```python
+field_by_col = np.all(good_cube, axis=1)
+solution = np.zeros(field_by_col.shape, dtype=bool)
+```
+
+The array `field_by_col` is a 2-D array where the rows represent the rules, and the columns represent the columns of the nearby tickets. An entry `(field, col)` is True if all entries along `(field, :, col)` are True. 
+
+The `solution` 2-D array is initialized to False, and eventually will have one True per row, such that an entry `(field, col)` is True if we know that `col` should match `field`.
+
+Both of these arrays are square since the number of fields matches the number of columns.
+
+We are finally approaching a solution, now! 
+
+In the example of
+
+```
+class: 0-1 or 4-19
+row: 0-5 or 8-19
+seat: 0-13 or 16-19
+
+your ticket:
+11,12,13
+
+nearby tickets:
+3,9,18
+15,1,5
+5,14,9
+```
+
+we have `field_by_col` as
+
+```python
+array([[False,  True,  True],
+       [ True,  True,  True],
+       [False, False,  True]])
+```
+
+The rows / fields are ordered as `array(['class', 'row', 'seat'], dtype='<U5')`. Right away, we can see that `seat` only has one possible option: column 2 (0-indexed). We iterate the following steps until we are done:
+
+```python
+fields_solved = np.sum(field_by_col, axis=1) == 1
+# On first iteration, fields_solved is array([False, False,  True])
+columns_solved = np.sum(field_by_col[fields_solved, :], axis=0) == 1
+# On first iteration, columns_solved is array([False, False,  True])
+solution[fields_solved, columns_solved] = field_by_col[
+    fields_solved, columns_solved
+]
+field_by_col[:, columns_solved] = False
+```
+
+1. The first calculation `fields_solved` shows the rows that we know a solution (with exactly one True). Then `columns_solved` shows the columns that are solved (it must be summed over axis 0 because there could be multiple fields/columns solved at once).
+2. Next, `solution` is updated with the fields and columns that were solved. On the first iteration, `solution` goes from a 2-D array of all False to:
+
+```python
+array([[False, False, False],
+       [False, False, False],
+       [False, False,  True]])
+```
+
+3. Finally, everything in the solved fields and columns of `field_by_col` is set to False. At the end of the first iteration, `field_by_col` is:
+
+```python
+array([[False,  True, False],
+       [ True,  True, False],
+       [False, False, False]])
+```
+
+and we can see that in the next iteration the rule `class` must match column 1 (0-indexed).
+
+The iteration repeats until everything in `field_by_col` is set to False. In the example, our final `solution` is:
+
+```python
+array([[False,  True, False],
+       [ True, False, False],
+       [False, False,  True]])
+```
+
+To finish out part 2, we simply get the right indices using [`numpy.char`][16f] (for access to vectorized string functions).
+
+```python
+idx = np.any(solution[np.char.startswith(axis0, "departure")], axis=0)
+return np.prod(mine[idx])
+```
+
+[16f]: https://numpy.org/doc/stable/reference/routines.char.html
+
+## Original, standard Python approach
+
 At first, I used ranges to represent the rule. So for example, `class: 1-3 or 5-7` becomes
 
 ```python
