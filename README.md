@@ -24,31 +24,14 @@ The CLI is common for each day. The main patterns for options are:
 
 # Table of contents
 
-+ [Day 1](#day-1)
-+ [Day 2](#day-2)
-+ [Day 3](#day-3)
-+ [Day 4](#day-4)
-+ [Day 5](#day-5)
-+ [Day 6](#day-6)
-+ [Day 7](#day-7)
-+ [Day 8](#day-8)
-+ [Day 9](#day-9)
-+ [Day 10](#day-10)
-+ [Day 11](#day-11)
-+ [Day 12](#day-12)
-+ [Day 13](#day-13)
-+ [Day 14](#day-14)
-+ [Day 15](#day-15)
-+ [Day 16](#day-16)
-+ [Day 17](#day-17)
-+ [Day 18](#day-18)
-+ [Day 19](#day-19)
-+ [Day 20](#day-20)
-+ [Day 21](#day-21)
-+ [Day 22](#day-22)
-+ [Day 23](#day-23)
-+ [Day 24](#day-24)
-+ [Day 25](#day-25)
+| `Day % 5 == 0` | `Day % 5 == 1` | `Day % 5 == 2` | `Day % 5 == 3` | `Day % 5 == 4` |
+| --- | --- | --- | --- | --- |
+| | [Day 1](#day-1) · [_code_](advent/day1) | [Day 2](#day-2) · [_code_](advent/day2) | [Day 3](#day-3) · [_code_](advent/day3) | [Day 4](#day-4) · [_code_](advent/day4) |
+| [Day 5](#day-5) · [_code_](advent/day5) | [Day 6](#day-6) · [_code_](advent/day6) | [Day 7](#day-7) · [_code_](advent/day7) | [Day 8](#day-8) · [_code_](advent/day8) | [Day 9](#day-9) · [_code_](advent/day9) |
+| [Day 10](#day-10) · [_code_](advent/day10) | [Day 11](#day-11) · [_code_](advent/day11) | [Day 12](#day-12) · [_code_](advent/day12) | [Day 13](#day-13) · [_code_](advent/day13) | [Day 14](#day-14) · [_code_](advent/day14) |
+| [Day 15](#day-15) · [_code_](advent/day15) | [Day 16](#day-16) · [_code_](advent/day16) | [Day 17](#day-17) · [_code_](advent/day17) | [Day 18](#day-18) · [_code_](advent/day18) | [Day 19](#day-19) · [_code_](advent/day19) |
+| [Day 20](#day-20) · [_code_](advent/day20) | [Day 21](#day-21) · [_code_](advent/day21) | [Day 22](#day-22) · [_code_](advent/day22) | [Day 23](#day-23) · [_code_](advent/day23) | [Day 24](#day-24) · [_code_](advent/day24) |
+| [Day 25](#day-25) · [_code_](advent/day25) | | | | |
 
 # Day 1
 
