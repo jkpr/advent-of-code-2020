@@ -347,7 +347,7 @@ That is true for my puzzle input and for all the examples.
 
 I will first describe my alternate solution, which uses `numpy` arrays.
 
-## Day 16, Part 1, numpy solution
+## Day 16, Part 1, numpy solution (alternate)
 
 The first task is to make a numpy array out of the string input, e.g. `"3,9,18"`. For that we can use [`numpy.fromstring`][16a]:
 
@@ -401,7 +401,7 @@ return np.sum(nearby[mask])
 
 [16e]: https://numpy.org/doc/stable/reference/generated/numpy.any.html
 
-## Day 16, Part 2, numpy solution
+## Day 16, Part 2, numpy solution (alternate)
 
 We get the cube again, and the first task is to remove the "bad" rows (defined as nearby tickets on which all entries do not fit any rule) from each 2-D array of nearby tickets. 
 
@@ -500,7 +500,7 @@ return np.prod(mine[idx])
 
 [16f]: https://numpy.org/doc/stable/reference/routines.char.html
 
-## Original, standard Python approach
+## Day 16, standard Python approach
 
 At first, I used ranges to represent the rule. So for example, `class: 1-3 or 5-7` becomes
 
@@ -544,7 +544,7 @@ Neighbors were obtained using the cartesian product of `[-1, 0, -1]` in 3 or 4 d
 
 I refactored the code so that it will work in any number of dimensions >= 3.
 
-## Day 17, numpy solution
+## Day 17, numpy solution (alternate)
 
 Instead of going line by line, I'll just note the interesting functions here:
 
@@ -607,3 +607,36 @@ This brought me back to my data structures and algorithms class. The solution is
 After part 2 was completed, I refactored so that the operator precedence is taken into account in order to reuse code.
 
 [18a]: https://en.wikipedia.org/wiki/Shunting-yard_algorithm
+
+## Day 18, AST solution (alternate)
+
+This solution uses the AST to get the precedence correct after swapping operators.
+
+For Part 1, I replaced `*` with `-` so that the operators would have the same precedence. Then after parsing the abstract syntax tree, I replaced `Sub` nodes with `Mult` nodes.
+
+It was somewhat difficult to get a value out of an `exec` / AST combo. I had to give `globals()` as an argument to exec.
+
+```python
+tree = ast.parse(f"this_result = {line.replace('*', '-')}")
+code = compile(tree, filename="<ast>", mode="exec")
+exec(code, globals())
+print(this_result)  # does not raise NameError.
+```
+
+Part 2 was only a little more complicated because I had to swap the precedence of the operators. So
+
+1. `*` -> `-`
+2. `+` -> `*`
+3. Parse AST
+4. Make substitutions
+5. Compile and execute!
+
+Important resources are:
+
+- [Python `ast` module documentation][18a]
+- [Green Tree Snakes][18b], how to actually do stuff with AST
+- [Stack overflow answer about `exec`][18c]
+
+[18a]: https://docs.python.org/3/library/ast.html
+[18b]: https://greentreesnakes.readthedocs.io/en/latest/index.html
+[18c]: https://stackoverflow.com/a/52013194/6438168
