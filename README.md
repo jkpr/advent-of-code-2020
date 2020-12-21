@@ -623,3 +623,9 @@ Important resources are:
 [18a]: https://docs.python.org/3/library/ast.html
 [18b]: https://greentreesnakes.readthedocs.io/en/latest/index.html
 [18c]: https://stackoverflow.com/a/52013194/6438168
+
+# Day 19
+
+My first thought was to build a regex by parsing out all possible rules. However, with the introduction of loops in part 2, that was no longer possible.
+
+I rewrote the code to be a recursive matcher. It recursively descends by substituting a higher-order rule with that rule expanded. This handles the Part 2 rule modifications perfectly with no changes.
