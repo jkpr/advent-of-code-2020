@@ -629,3 +629,36 @@ Important resources are:
 My first thought was to build a regex by parsing out all possible rules. However, with the introduction of loops in part 2, that was no longer possible.
 
 I rewrote the code to be a recursive matcher. It recursively descends by substituting a higher-order rule with that rule expanded. This handles the Part 2 rule modifications perfectly with no changes.
+
+# Day 20
+
+For the first time during this advent calendar, I have written a class to represent the individual tiles of the image. 
+One thing to say about the Object Oriented Programming: try not to have multiple properties describe the same state of the object.
+In my first attempt, I manipulated the tile contents and also kept track of the flip and rotate status.
+In my second (and better) attempt, I kept track of the flip and rotate status while keeping the original tile contents as they were.
+When I needed the contents in the current state, I applied the flips and rotates then returned the contents.
+
+One interesting thing is [`itertools.chain()`][20a]. In the end I had a list of String objects, and I needed to count the number of `"#"` characters in those String objects. Instead of a standard:
+
+```python
+lines = [
+    "..#..##.",
+    "...###.#",
+    ".###....",
+]
+count = 0
+for line in lines:
+    for ch in line:
+        if ch == "#":
+            count += 1
+```
+
+I can chain together all the lines into a single iterator:
+
+```python
+count = sum(ch == "#" for ch in itertools.chain(*lines))
+```
+
+The chain exhausts each iterator argument in sequence.
+
+[20a]: https://docs.python.org/3/library/itertools.html#itertools.chain
