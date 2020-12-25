@@ -757,3 +757,9 @@ There are three axes, `x`, `y`, and `z`, and the constraint is that `x+y+z = 0`.
 To solve the problem, I kept track of coordinates, just the same as in a square.
 
 [24a]: https://www.redblobgames.com/grids/hexagons/#coordinates-cube
+
+# Day 25
+
+Based on the easter eggs, this is an implementation of the [Diffie-Hellman key exchange][25a].
+
+[25a]: https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange
