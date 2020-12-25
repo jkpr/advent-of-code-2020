@@ -662,3 +662,7 @@ count = sum(ch == "#" for ch in itertools.chain(*lines))
 The chain exhausts each iterator argument in sequence.
 
 [20a]: https://docs.python.org/3/library/itertools.html#itertools.chain
+
+# Day 21
+
+Nothing too fancy going on here. Just need to understand the problem first.
