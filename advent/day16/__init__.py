@@ -27,7 +27,7 @@ def parse_input(lines: List[str]):
 
 
 def part1(lines: List[str]):
-    rules, mine, nearby = parse_input(lines)
+    rules, _, nearby = parse_input(lines)
     valid = set.union(*rules.values())
     return sum(i for i in chain(*nearby) if i not in valid)
 

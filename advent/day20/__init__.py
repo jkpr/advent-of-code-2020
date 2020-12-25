@@ -260,7 +260,7 @@ def orient_all_tiles(tiles):
                     this_row.append(orientated)
                     remaining_tiles.remove(key)
                     break
-                except:
+                except TypeError:
                     pass
         canvas.append(this_row)
     return canvas

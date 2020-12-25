@@ -28,13 +28,13 @@ def evaluate(line, precedence):
         if item in "0123456789":
             result.append(int(item))
         elif item == "*":
-            a = result.pop()
-            b = result.pop()
-            result.append(a * b)
+            i = result.pop()
+            j = result.pop()
+            result.append(i * j)
         elif item == "+":
-            a = result.pop()
-            b = result.pop()
-            result.append(a + b)
+            i = result.pop()
+            j = result.pop()
+            result.append(i + j)
     return result[0]
 
 
