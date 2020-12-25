@@ -1,6 +1,6 @@
 # Advent of Code 2020
 
-These are my solutions to Advent of Code 2020.
+These are my solutions to Advent of Code 2020. The solutions are in the `__init__.py` files for each day's package. Sometimes, there is an `alternate` subpackage that has an alternate solution in its own `__init__.py`.
 
 Try the problems yourself at [https://adventofcode.com/2020/](https://adventofcode.com/2020/).
 
@@ -26,12 +26,12 @@ The CLI is common for each day. The main patterns for options are:
 
 | `Day % 5 == 0` | `Day % 5 == 1` | `Day % 5 == 2` | `Day % 5 == 3` | `Day % 5 == 4` |
 | --- | --- | --- | --- | --- |
-| | [Day 1](#day-1) · [_code_](advent/day1) | [Day 2](#day-2) · [_code_](advent/day2) | [Day 3](#day-3) · [_code_](advent/day3) | [Day 4](#day-4) · [_code_](advent/day4) |
-| [Day 5](#day-5) · [_code_](advent/day5) | [Day 6](#day-6) · [_code_](advent/day6) | [Day 7](#day-7) · [_code_](advent/day7) | [Day 8](#day-8) · [_code_](advent/day8) | [Day 9](#day-9) · [_code_](advent/day9) |
-| [Day 10](#day-10) · [_code_](advent/day10) | [Day 11](#day-11) · [_code_](advent/day11) | [Day 12](#day-12) · [_code_](advent/day12) | [Day 13](#day-13) · [_code_](advent/day13) | [Day 14](#day-14) · [_code_](advent/day14) |
-| [Day 15](#day-15) · [_code_](advent/day15) | [Day 16](#day-16) · [_code_](advent/day16) | [Day 17](#day-17) · [_code_](advent/day17) | [Day 18](#day-18) · [_code_](advent/day18) | [Day 19](#day-19) · [_code_](advent/day19) |
-| [Day 20](#day-20) · [_code_](advent/day20) | [Day 21](#day-21) · [_code_](advent/day21) | [Day 22](#day-22) · [_code_](advent/day22) | [Day 23](#day-23) · [_code_](advent/day23) | [Day 24](#day-24) · [_code_](advent/day24) |
-| [Day 25](#day-25) · [_code_](advent/day25) | | | | |
+| | 1 · [_notes_](#day-1) · [_code_](advent/day1) | 2 · [_notes_](#day-2) · [_code_](advent/day2) | 3 · [_notes_](#day-3) · [_code_](advent/day3) | 4 · [_notes_](#day-4) · [_code_](advent/day4) |
+| 5 · [_notes_](#day-5) · [_code_](advent/day5) | 6 · [_notes_](#day-6) · [_code_](advent/day6) | 7 · [_notes_](#day-7) · [_code_](advent/day7) | 8 · [_notes_](#day-8) · [_code_](advent/day8) | 9 · [_notes_](#day-9) · [_code_](advent/day9) |
+| 10 · [_notes_](#day-10) · [_code_](advent/day10) | 11 · [_notes_](#day-11) · [_code_](advent/day11) | 12 · [_notes_](#day-12) · [_code_](advent/day12) | 13 · [_notes_](#day-13) · [_code_](advent/day13) | 14 · [_notes_](#day-14) · [_code_](advent/day14) |
+| 15 · [_notes_](#day-15) · [_code_](advent/day15) | 16 · [_notes_](#day-16) · [_code_](advent/day16) | 17 · [_notes_](#day-17) · [_code_](advent/day17) | 18 · [_notes_](#day-18) · [_code_](advent/day18) | 19 · [_notes_](#day-19) · [_code_](advent/day19) |
+| 20 · [_notes_](#day-20) · [_code_](advent/day20) | 21 · [_notes_](#day-21) · [_code_](advent/day21) | 22 · [_notes_](#day-22) · [_code_](advent/day22) | 23 · [_notes_](#day-23) · [_code_](advent/day23) | 24 · [_notes_](#day-24) · [_code_](advent/day24) |
+| 25 · [_notes_](#day-25) · [_code_](advent/day25) | | | | |
 
 # Day 1
 
@@ -745,3 +745,15 @@ Finally, `itertools.repeat(None)` is just an iterator that never ends. It repeat
 [23a]: https://docs.python.org/3/library/itertools.html#itertools.islice
 [23b]: https://docs.python.org/3/library/itertools.html#itertools.accumulate
 [23c]: https://docs.python.org/3/library/itertools.html#itertools.repeat
+
+# Day 24
+
+Once I got the right coordinate system, this one was not too difficult. Thank you, [redblobgames.com][24a], for the following graphic. 
+
+![Hexagonal coordinate system](static/hexagon.png)
+
+There are three axes, `x`, `y`, and `z`, and the constraint is that `x+y+z = 0`. Moving to an adjacent hexagon increases one coordinate by one and decreases a different coordinate by one.
+
+To solve the problem, I kept track of coordinates, just the same as in a square.
+
+[24a]: https://www.redblobgames.com/grids/hexagons/#coordinates-cube
