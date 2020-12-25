@@ -708,3 +708,40 @@ if env_base := os.environ.get("PYTHONUSERBASE", None):
 ```
 
 [22a]: https://www.python.org/dev/peps/pep-0572/
+
+# Day 23
+
+For this problem, I create a dictionary where the key is a member / cup, and the value is the member / cup that is next to it.
+
+In order to get the next N items after a given cup, we need to do something like (`cups` is our dictionary, and `cup` is the starting cup):
+
+```python
+cups[cup]
+cups[cups[cup]]
+cups[cups[cups[cup]]]
+...
+cups[...[cups[cups[cup]]]]
+```
+
+What is the pythonic way to do this? We can use `itertools`!
+
+
+```python
+itertools.islice(
+    itertools.accumulate(
+        itertools.repeat(None),
+        lambda x, _: cups[x],
+        initial=cups[cup]
+    ), N
+)
+```
+
+Here, [`itertools.islice()`][23a] is used to get the next `N` items of an iterator (the accumulate iterator). This is "taking" the next `N` items of the iterator.
+
+Next, [`itertools.accumulate()`][23b] starts with `cups[cup]` (the `initial` key word argument), then uses the lambda function to get the next item in the sequence. The function in `accumulate` should take two arguments: the first is the stored / accumulated results; the second is the next item from the supplied iterator. In this case, we ignore the second argument.
+
+Finally, `itertools.repeat(None)` is just an iterator that never ends. It repeates `None` indefinitely.
+
+[23a]: https://docs.python.org/3/library/itertools.html#itertools.islice
+[23b]: https://docs.python.org/3/library/itertools.html#itertools.accumulate
+[23c]: https://docs.python.org/3/library/itertools.html#itertools.repeat
