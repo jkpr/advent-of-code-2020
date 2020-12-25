@@ -666,3 +666,45 @@ The chain exhausts each iterator argument in sequence.
 # Day 21
 
 Nothing too fancy going on here. Just need to understand the problem first.
+
+# Day 22
+
+This is a good time to bring up Python 3.8's "[walrus operator][22a]" (`:=`).
+
+In Day 22, I have used it as
+
+```python
+...
+if (state := (tuple(deck1), tuple(deck2))) in seen:
+    deck2.clear()
+    return deck1, deck2
+seen.add(state)
+...
+```
+
+Here is important to note the priority of the operator. The enclosing parentheses are necessary because the walrus operator has very low precedence. Only the comma has lower, according to PEP-572.
+
+So these all have different results for `state`:
+
+```python
+(state := (tuple(deck1), tuple(deck2))) in seen  ## state is a tuple of two tuples
+(state := tuple(deck1), tuple(deck2)) in seen  ## state is tuple(deck1)
+state := (tuple(deck1), tuple(deck2)) in seen  ## state is True / False
+```
+
+So far, I have mostly seen the walrus operator used to improve situations where we create an object from a statement and perform a boolean test on it. For example
+
+```python
+env_base = os.environ.get("PYTHONUSERBASE", None)
+if env_base:
+    return env_base
+```
+
+becomes
+
+```python
+if env_base := os.environ.get("PYTHONUSERBASE", None):
+    return env_base
+```
+
+[22a]: https://www.python.org/dev/peps/pep-0572/
